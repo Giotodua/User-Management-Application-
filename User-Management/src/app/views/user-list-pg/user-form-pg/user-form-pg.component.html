@@ -1,0 +1,59 @@
+<div [ngStyle]="{
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center'
+}">
+  <form (ngSubmit)="onSubmit()" #f="ngForm" class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input name="name" required [(ngModel)]="user.name" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input name="lastName" required [(ngModel)]="user.lastName" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" type="email" name="email" required
+        [(ngModel)]="user.email" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Personal Identification Number</mat-label>
+      <input pattern="^[0-9]{11}$" type="number" name="personalIdentificationNumber" required
+        [(ngModel)]="user.personalIdentificationNumber" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Birth Date</mat-label>
+      <input pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$" [(ngModel)]="user.date"
+        placeholder="DD/MM/YYYY" matInput required name="date" />
+    </mat-form-field>
+
+    <div [ngStyle]="{
+      display: 'flex',
+      justifyContent: 'space-between'
+    }" class="example-full-width field-table">
+      <mat-form-field class="example-half-width" appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select required [(ngModel)]="user.categoryId" name="categoryId">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-half-width" appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select required [(ngModel)]="user.statusId" name="statusId">
+          <mat-option *ngFor="let status of statuses" [value]="status.id">
+            {{status.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button [disabled]="f.invalid" type="submit" mat-raised-button color="primary">Save</button>
+  </form>
+</div>

@@ -1,0 +1,12 @@
+<mat-dialog-content>
+
+  <form (ngSubmit)="onSubmit()" #f="ngForm" class="example-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Status Name</mat-label>
+      <input name="name" required [(ngModel)]="status.name" matInput>
+    </mat-form-field>
+
+    <button [disabled]="f.invalid" type="submit" mat-raised-button color="primary">Save</button>
+  </form>
+
+</mat-dialog-content>

@@ -1,0 +1,130 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <form (ngSubmit)="filter()" #f="ngForm" class="example-form">
+      <h2>Filter</h2>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input name="name" [(ngModel)]="filterObj.name" matInput>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input name="lastName" [(ngModel)]="filterObj.lastName" matInput>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" name="email" [(ngModel)]="filterObj.email" matInput>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Personal Identification Number</mat-label>
+        <input type="number" name="personalIdentificationNumber" [(ngModel)]="filterObj.personalIdentificationNumber"
+          matInput>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input [(ngModel)]="filterObj.startDate" placeholder="DD/MM/YYYY" matInput name="date" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input [(ngModel)]="filterObj.endDate" placeholder="DD/MM/YYYY" matInput name="date" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="filterObj.categoryName" name="categoryName">
+          <mat-option *ngFor="let category of categories" [value]="category.name">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="filterObj.statusName" name="statusName">
+          <mat-option *ngFor="let status of statuses" [value]="status.name">
+            {{status.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button [disabled]="f.invalid" type="submit" mat-raised-button color="primary">Filter</button>
+    </form>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div [ngStyle]="{
+      width: '100%',
+      marginTop: '10px',
+      marginBottom: '10px',
+      display: 'flex',
+      justifyContent: 'center'
+    }">
+      <button (click)="openFormPg()" mat-raised-button class="add-new-btn" color="primary">Add New</button>
+    </div>
+
+    <div class="mat-elevation-z8">
+      <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container class="none-1000" matColumnDef="id">
+          <th class="none-1000" mat-header-cell *matHeaderCellDef> ID </th>
+          <td class="none-1000" mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container class="none-500" matColumnDef="name">
+          <th class="none-500" mat-header-cell *matHeaderCellDef> Name </th>
+          <td class="none-500" mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container class="none-1000" matColumnDef="lastName">
+          <th class="none-1000" mat-header-cell *matHeaderCellDef> Last Name </th>
+          <td class="none-1000" mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <ng-container class="none-500" matColumnDef="email">
+          <th class="none-500" mat-header-cell *matHeaderCellDef> Email </th>
+          <td class="none-500" mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="personalIdentificationNumber">
+          <th mat-header-cell *matHeaderCellDef> PIN </th>
+          <td mat-cell *matCellDef="let element"> {{element.personalIdentificationNumber}} </td>
+        </ng-container>
+
+        <ng-container class="none-1000" matColumnDef="date">
+          <th class="none-1000" mat-header-cell *matHeaderCellDef> Date </th>
+          <td class="none-1000" mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <ng-container class="none-750" matColumnDef="category">
+          <th class="none-750" mat-header-cell *matHeaderCellDef> Category </th>
+          <td class="none-750" mat-cell *matCellDef="let element"> {{element.category.name}} </td>
+        </ng-container>
+
+        <ng-container class="none-750" matColumnDef="status">
+          <th class="none-750" mat-header-cell *matHeaderCellDef> Status </th>
+          <td class="none-750" mat-cell *matCellDef="let element"> {{element.status.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> Update </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="openFormPg(element.id)" mat-raised-button
+              color="accent">Edit</button> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="delete(element.id)" mat-raised-button
+              color="warn">Delete</button> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

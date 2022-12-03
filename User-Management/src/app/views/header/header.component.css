@@ -1,0 +1,26 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.links-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.link {
+  cursor: pointer;
+  transition: all ease .5s;
+}
+
+.link:hover {
+  color: rgb(82, 77, 77);
+}
+
+.active {
+  color: rgb(82, 77, 77);
+}

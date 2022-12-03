@@ -1,0 +1,52 @@
+table {
+  width: 100%;
+}
+
+.add-new-btn {
+  margin: auto;
+}
+
+mat-drawer {
+  width: 20%;
+  height: 100vh;
+}
+
+mat-drawer-container {
+  height: 100vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1000px) {
+  .none-1000 {
+    display: none;
+  }
+
+  mat-drawer {
+    width: 30%;
+    height: 100vh;
+  }
+}
+
+@media (max-width: 750px) {
+  .none-750 {
+    display: none;
+  }
+
+  .none-500 {
+    display: none;
+  }
+
+  table {
+    margin: 10px;
+  }
+
+  mat-drawer {
+    width: 40%;
+    height: 100vh;
+  }
+}
